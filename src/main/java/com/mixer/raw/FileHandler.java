@@ -155,6 +155,35 @@ public class FileHandler {
     }
 
     /**
+     * After opening the FileHandler, we load all data into the index
+     * @throws IOException
+     */
+    public void loadAllDataToIndex() throws IOException {
+        if (this.dbFile.length() == 0) {
+            return;
+        }
+        long currentPos = 0;
+        long rowNum = 0;
+
+        while(currentPos < this.dbFile.length()) {
+            this.dbFile.seek(currentPos);
+            boolean isDeleted = this.dbFile.readBoolean();
+            if (!isDeleted) {
+                Index.getInstance().add(currentPos);
+                rowNum++;
+            }
+
+            currentPos += 1;
+            this.dbFile.seek(currentPos);
+            int recordLength = this.dbFile.readInt();
+            currentPos += 4;
+            currentPos += recordLength;
+        }
+
+        System.out.println("Total row number in DB is: " + rowNum);
+    }
+
+    /**
      * Closing a db file
      * @throws IOException
      */

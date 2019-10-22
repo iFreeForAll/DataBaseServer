@@ -43,4 +43,9 @@ public final class Index {
     public long getTotalRowNumber() {
         return this.totalRowNumber;
     }
+
+    public void clear() {
+        this.totalRowNumber = 0;
+        this.rowIndex.clear();
+    }
 }
