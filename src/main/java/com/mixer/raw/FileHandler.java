@@ -190,4 +190,16 @@ public class FileHandler {
     public void close() throws IOException {
         this.dbFile.close();
     }
+
+    public void deleteRow(int rowNumber) throws IOException {
+        long bytePositionOfRecord = Index.getInstance().getBytePosition(rowNumber);
+        if (bytePositionOfRecord == -1) {
+            throw new IOException("Row doesn't exist in Index!");
+        }
+        this.dbFile.seek(bytePositionOfRecord);
+        this.dbFile.writeBoolean(true);
+
+        // update the index
+        Index.getInstance().remove(rowNumber);
+    }
 }

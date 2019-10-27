@@ -13,14 +13,10 @@ public class TestApp {
             String dbFileName = "Dbserver.db";
             DB db = new DBServer(dbFileName);
             db.add("Oleg", 24, "Usinsk", "X777OO", "Cool guy!");
-            db.close();
-
-            db = new DBServer(dbFileName);
-            Person person = db.read(0);
 
             System.out.println("Total num of rows in DB: " + Index.getInstance().getTotalRowNumber());
-            System.out.println(person);
 
+            db.delete(0);
             System.out.println(Index.getInstance().getTotalRowNumber());
             db.close();
 
