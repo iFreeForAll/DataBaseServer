@@ -182,8 +182,8 @@ public class FileHandler {
             currentPos += recordLength;
         }
 
-        System.out.println("Total row number in DB is: " + rowNum);
-        System.out.println("Total deleted row number in DB is: " + deletedRows);
+        System.out.println("After startup: Total row number in DB is: " + rowNum);
+        System.out.println("After startup: Total deleted row number in DB is: " + deletedRows);
     }
 
     /**
